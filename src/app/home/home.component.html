@@ -1,28 +1,38 @@
 <div class="container home-body">
-  <p>
-    My Music
-  </p>
-
+  <h2 class="text-center" style="margin-bottom: 30px;">My Music</h2>
   <div class="row">
-    <div class="col-md-5" style="border: solid 2px black">
-      <app-musicas [listaMusicas]="musicas" (adicionado)="atualizarPlaylist($event)"></app-musicas>
+    <div class="col-md-5">
+      <app-pesquisa-musica (pesquisaRealizada)="pesquisaMusicaRealizada($event)" ></app-pesquisa-musica>
     </div>
-
     <div class="col-md-2">
+
+    </div>
+    <div class="col-md-5">
+      <app-pesquisa-playlist (pesquisaUsuarioRealizada)="pesquisaUsuarioRealizada($event)" ></app-pesquisa-playlist>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <app-musicas [listaMusicas]="musicas" (ordenarMusica)="ordenarListaMusica($event)" (selecionarTodas)="selecionarTodasMusicas($event)" (adicionado)="selecionarMusica($event)"></app-musicas>
+    </div>
+    <div class="col-md-2 text-center" style="margin-top: 60px">
       <div class="row">
-        <div class="col-md-12" style="margin-top: 200px">
-          <button style="width: 90px" (click)="criaPlaylist()" >Adicionar</button>
+        <div class="col-md-12">
+          <button class="btn btn-primary" style="width: 70px" [disabled]="!enableAdd" (click)="criaPlaylist()">
+            <i class="fa fa-angle-double-right" style="font-size: 25px"></i>
+          </button>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12" style="margin-top: 20px">
-          <button style="width: 90px" (click)="removerMusicas()" >Remover</button>
+        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 60px">
+          <button class="btn btn-primary" style="width: 70px" [disabled]="!enableRemove" (click)="removerMusicas()">
+            <i class="fa fa-angle-double-left" style="font-size: 25px"></i>
+          </button>
         </div>
       </div>
     </div>
-
-    <div class="col-md-5" style="border: solid 2px black">
-      <app-playlist [musicasPlaylist]="musicasPlaylist" (removido)="marcaMusicaRemocao($event)"></app-playlist>
+    <div class="col-md-5">
+      <app-playlist (removerMusica)="removerMusica($event)" (removerTodasMusicas)="removerTodasMusicas($event)" [musicasPlaylist]="musicasPlaylist"></app-playlist>
     </div>
   </div>
 

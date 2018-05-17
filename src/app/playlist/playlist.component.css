@@ -1,0 +1,16 @@
+.icon-order {
+    float: right;
+    margin-top: 5px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #d6d8db;
+}

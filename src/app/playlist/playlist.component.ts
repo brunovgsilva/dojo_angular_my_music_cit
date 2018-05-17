@@ -10,17 +10,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PlaylistComponent implements OnInit {
 
   @Input() musicasPlaylist: Array<any> = new Array<any>();
-  @Output() removido: EventEmitter<any> = new EventEmitter<any>()
+  @Output() removerTodasMusicas: EventEmitter<any> = new EventEmitter<any>()
+  @Output() removerMusica: EventEmitter<any> = new EventEmitter<any>()
 
   constructor() { }
 
   ngOnInit() {
-  
+
   }
 
-  public selecionarMusica(musica:any) {
-    console.log(musica);
-    this.removido.emit(musica);
+  public selecionarTodasMusicas(checked: any) {
+    this.removerTodasMusicas.emit(checked);
+  }
+
+  public selecionarMusica(musica: any) {
+    this.removerMusica.emit(musica)
   }
 
 }

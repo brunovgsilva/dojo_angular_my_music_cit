@@ -1,26 +1,45 @@
-<p>
-    Component Musicas
-</p>
-<app-pesquisa-musica></app-pesquisa-musica>
-<div class="row">
-    <div class="col-md-12">
-        <table>
-            <tr>
-                <th>Música</th>
-                <th>Artista</th>
-                <th>
-                    <input type="checkbox" name="musicaCheckbox" (change)="selecionarMusica()" />
-                </th>
-            </tr>
-
-            <tr *ngFor="let musica of listaMusicas">
-
-                <td>{{musica.nome}}</td>
-                <td>{{musica.artista.nome }}</td>
-                <td>
-                    <input #mscSelecionada type="checkbox" name="musicaCheckbox" (change)="selecionarMusica(musica)" [checked]="this.musicasSelecionadas.indexOf(musica.id) >= 0">
-                </td>
-            </tr>
-        </table>
+<div class="card">
+    <h5 class="card-header">Músicas</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">
+                                <a href="#" (click)="ordernarListaMusica('nome')">
+                                    <span>Música</span>
+                                    <i class="text-right fa fa-sort icon-order"></i>
+                                </a>
+                            </th>
+                            <th scope="col">
+                                <a href="#" (click)="ordernarListaMusica('artista')">
+                                    <span>Artista</span>
+                                    <i class="text-right fa fa-sort icon-order"></i>
+                                </a>
+                            </th>
+                            <th scope="col">
+                                <input type="checkbox" name="musicaCheckbox" (change)="selecionarTodasMusicas($event.target.checked)" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let musica of listaMusicas">
+                            <th scope="row">
+                                {{listaMusicas.indexOf(musica) + 1}}
+                            </th>
+                            <td>
+                                {{musica.nome}}
+                            </td>
+                            <td>{{musica.artista.nome }}</td>
+                            <td>
+                                <input type="checkbox" name="musicaCheckbox" (change)="selecionarMusica(musica)" [checked]="musica.checked">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

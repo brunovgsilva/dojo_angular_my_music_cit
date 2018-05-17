@@ -18,24 +18,25 @@ export class MusicaService {
 
     public urlService: string = 'https://intense-ocean-93206.herokuapp.com/api/'
 
-    public getMusicas(filter: string): Promise<any> {
+    public getMusicas(filter: string): Observable<any> {
         let apiUrl = this.urlService + "musicas/?filtro=" + filter;
-
-        return this.http.get(apiUrl).toPromise();
+        return this.http.get(apiUrl);
     }
 
     public getPlaylists(usuario: string): Promise<any> {
         let apiUrl = this.urlService + "playlists/?user=" + usuario;
-
         return this.http.get(apiUrl).toPromise();
     }
 
     public putPlayList(musicas: Array<any>) {
         let idUsuario = Guid.create();
         let apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas";
-
         return this.http.put(apiUrl, []);
     }
 
-
+    public deleteMusicaPlayList(musica: any) {
+        let idUsuario = Guid.create();
+        let apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas/" + musica.id;
+        return this.http.delete(apiUrl);
+    }
 }

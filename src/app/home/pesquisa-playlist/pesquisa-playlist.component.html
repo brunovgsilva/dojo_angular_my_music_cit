@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group row">
+            <label for="nomeUsuario" class="col-sm-2 col-form-label">Usuário</label>
+            <div class="col-sm-10">
+                <input id="nomeUsuario" name="nomeUsuario" type="text" class="form-control" (keyup.enter)="pesquisar($event.target.value)"
+                />
+            </div>
+        </div>
+    </div>
+</div>

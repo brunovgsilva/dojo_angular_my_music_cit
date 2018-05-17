@@ -1,0 +1,36 @@
+/* table>thead {
+    display: table;
+    overflow: auto;
+    width: 100%
+}
+
+table>thead>tr>th:last-child {
+    margin-right: 20px;
+}
+
+.table-size {
+    width: 100%;
+}
+
+.scroll-table {
+    display: block;
+    height: 300px;
+    overflow: auto;
+} */
+
+a{
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #d6d8db;
+}
+
+.icon-order {
+    float: right;
+    margin-top: 5px;
+}

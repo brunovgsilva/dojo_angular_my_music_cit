@@ -1,27 +1,37 @@
-<p>
-    Component Playlists
-</p>
-<app-pesquisa-playlist></app-pesquisa-playlist>
-<div class="row">
-    <div class="col-md-12">
-      
-        <table>
-            <tr>
-                <th>Música</th>
-                <th>Artista</th>
-                <th>
-                    <input type="checkbox" name="musicaCheckbox" (change)="selecionarMusica()" />
-                </th>
-            </tr>
-
-            <tr *ngFor="let musica of musicasPlaylist">
-
-                <td>{{musica.nome}}</td>
-                <td>{{musica.artista.nome }}</td>
-                <td>
-                    <input type="checkbox" name="musicaCheckbox" (change)="selecionarMusica(musica)">
-                </td>
-            </tr>
-        </table>
+<div class="card">
+    <h5 class="card-header ">Playlist</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped table-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">
+                                    <span>Música</span>
+                                    <i class="text-right fa fa-sort icon-order"></i>
+                                </th>
+                                <th scope="col">
+                                    <span>Artista</span>
+                                    <i class="text-right fa fa-sort icon-order"></i>
+                                </th>
+                            <th scope="col">
+                                <input type="checkbox"  name="musicaCheckbox" (change)="selecionarTodasMusicas($event.target.checked)" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let musica of musicasPlaylist">
+                            <th scope="row">{{musicasPlaylist.indexOf(musica) + 1}}</th>
+                            <td>{{musica.nome}}</td>
+                            <td>{{musica.artista.nome }}</td>
+                            <td>
+                                <input type="checkbox" name="musicaCheckbox" (change)="selecionarMusica(musica)" [checked]="musica.checked">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
