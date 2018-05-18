@@ -2,24 +2,26 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+import { MusicaService } from '../musicas.service';
+import { Musica } from '../musica.model'
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+fdescribe('HomeComponent', () => {
+  const component = new HomeComponent(null);  
+  it('Testando Preenchimento da Lista de Musicas', () => {
+    const musicas : Musica[] = [{ id: "1", nome: "Musica 01", artistaId: "1" }];
+    component.pesquisaMusicaRealizada(musicas);
+    expect(component.musicas.length > 0).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Testando Preenchimento da Lista de Musicas', () => {
+    const musicas = []
+    component.pesquisaMusicaRealizada(musicas);
+    expect(component.musicas.length > 0).toBeTruthy();
+  });
+
+  it('Testando Preenchimento da Lista de Musicas', () => {
+    const musicas = null;
+    component.pesquisaMusicaRealizada(musicas);
+    expect(component.musicas.length > 0).toBeTruthy();
   });
 });

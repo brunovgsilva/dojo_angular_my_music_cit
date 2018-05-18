@@ -1,42 +1,45 @@
-import { Injectable } from '@angular/core'
-import { Http } from '@angular/http'
-import { HttpHeaders, HttpResponse } from '@angular/common/http'
-import { Guid } from 'guid-typescript'
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Guid } from 'guid-typescript';
 
-declare let guid
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
 
 import { Observable } from 'rxjs/Observable'
+
+import { Musica } from './musica.model'
 
 @Injectable()
 export class MusicaService {
 
     constructor(private http: Http) {
-
-
     }
 
-    public urlService: string = 'https://intense-ocean-93206.herokuapp.com/api/'
+    public urlService = 'https://intense-ocean-93206.herokuapp.com/api/';
 
-    public getMusicas(filter: string): Observable<any> {
-        let apiUrl = this.urlService + "musicas/?filtro=" + filter;
-        return this.http.get(apiUrl);
+    public getMusicas(filter: string): Observable<Musica[]> {
+        const apiUrl = this.urlService + "musicas/?filtro=" + filter;
+        return this.http.get(apiUrl)
+            .map(x => x.json());
     }
 
     public getPlaylists(usuario: string): Promise<any> {
-        let apiUrl = this.urlService + "playlists/?user=" + usuario;
+        const apiUrl = this.urlService + "playlists/?user=" + usuario;
         return this.http.get(apiUrl).toPromise();
     }
 
     public putPlayList(musicas: Array<any>) {
-        let idUsuario = Guid.create();
-        let apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas";
+        const idUsuario = Guid.create();
+        const apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas";
         return this.http.put(apiUrl, []);
     }
 
     public deleteMusicaPlayList(musica: any) {
-        let idUsuario = Guid.create();
-        let apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas/" + musica.id;
+        const idUsuario = Guid.create();
+        const apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas/" + musica.id;
         return this.http.delete(apiUrl);
     }
 }

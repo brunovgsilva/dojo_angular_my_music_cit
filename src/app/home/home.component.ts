@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicaService } from '../musicas.service';
 
-
 import { Observable } from 'rxjs/Rx';
 
+import { Musica } from '../musica.model'
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,10 @@ import { Observable } from 'rxjs/Rx';
 
 export class HomeComponent implements OnInit {
 
-  musicas: any = [];
-  musicasPlaylist: Array<any> = [];
+  public enableRemove: boolean;
+  public enableAdd: boolean;
+  musicas: Musica[] = [];
+  musicasPlaylist: Array<Musica> = [];
 
   public orderDesc = true;
 
@@ -24,26 +26,26 @@ export class HomeComponent implements OnInit {
 
   }
 
-  public enableRemove = false;
-  public enableAdd = false;
+  public pesquisaMusicaRealizada(musicas: Musica[]) {
+    this.OrderByArray(musicas, "nome").map(item => item.nome);
+    this.musicas = musicas;
+    this.musicas.forEach(element => {
+      element.checked = false;
+    });
+  }
+
   public pesquisaUsuarioRealizada(playList: any) {
-    if (playList != null) {
+    this.musicasPlaylist = [];
+    if (playList != null && playList.playlistMusicas != null) {
       this.enableAdd = true;
       this.enableRemove = true;
-      this.musicasPlaylist = [];
       playList.playlistMusicas.forEach((play) => {
         this.musicasPlaylist.push(play.musica);
       })
-    }
-    else {
+    } else {
       this.enableAdd = true;
       this.enableRemove = true;
     }
-  }
-
-  public pesquisaMusicaRealizada(musicas: any) {
-    this.OrderByArray(musicas, "nome").map(item => item.nome);
-    this.musicas = musicas;
   }
 
   public OrderByArray(values: any[], orderType: any) {
@@ -88,14 +90,14 @@ export class HomeComponent implements OnInit {
   }
 
   public removerMusica(musica: any) {
-    let resultFind = this.musicasPlaylist.filter(filter => filter.id === musica.id);
+    const resultFind = this.musicasPlaylist.filter(filter => filter.id === musica.id);
     if (resultFind != null && resultFind[0].id === musica.id) {
       if (resultFind[0].checked === true) {
         resultFind[0].checked = false;
+
       }
-      else {
+      else
         resultFind[0].checked = true;
-      }
     }
   }
 
@@ -113,16 +115,15 @@ export class HomeComponent implements OnInit {
   }
 
   public selecionarMusica(musica: any) {
-    this.musicas.find(function (element) {
-      if (element.id === musica.id) {
-        if (element.checked === true) {
-          element.checked = false;
-        }
-        else {
-          element.checked = true;
-        }
+    const results: Musica[] = this.musicas.filter(m => m.id === musica.id);
+    if (results != null && results.length > 0) {
+      const resultMusic: Musica = results[0];
+      if (resultMusic.checked === true) {
+        resultMusic.checked = false;
       }
-    });
+      else
+        resultMusic.checked = true;
+    }
   }
 
   public criaPlaylist() {
@@ -130,16 +131,18 @@ export class HomeComponent implements OnInit {
       .toPromise().then((resposta: any) => {
         if (resposta.status == "200") {
           this.musicas.forEach((musica) => {
-            let resFind = this.musicasPlaylist.filter(f => f.id == musica.id);
+            const resFind = this.musicasPlaylist.filter(f => f.id === musica.id);
 
-            if (musica.checked === true && resFind.length == 0) {
-              let newMusica = {
-                checked: false, id: musica.id,
-                nome: musica.nome, artista: musica.artista
-              };
-              this.musicasPlaylist.push(newMusica)
+            if (musica.checked === true && resFind.length === 0) {
+              const newMusica = new Musica();
+              newMusica.checked = false;
+              newMusica.id = musica.id;
+              newMusica.nome = musica.nome;
+              newMusica.artista = musica.artista
+              this.musicasPlaylist.push(newMusica);
             }
-          })
+          });
+
           this.OrderByArray(this.musicasPlaylist, "nome").map(item => item.nome);
         }
       })
@@ -147,13 +150,12 @@ export class HomeComponent implements OnInit {
 
   public removerMusicas() {
     for (let index = this.musicasPlaylist.length; index--; index >= 0) {
-      let musica = this.musicasPlaylist[index];
+      const musica = this.musicasPlaylist[index];
       if (musica.checked === true) {
         this.musicaService.deleteMusicaPlayList(musica)
           .subscribe((result) => {
-
-            let index = this.musicasPlaylist.indexOf(musica);
-            this.musicasPlaylist.splice(index, 1);
+            const indexPlayList = this.musicasPlaylist.indexOf(musica);
+            this.musicasPlaylist.splice(indexPlayList, 1);
           });
       }
     }
@@ -162,8 +164,7 @@ export class HomeComponent implements OnInit {
   public ordenarListaMusica(value: any) {
     if (value === "nome") {
       this.OrderByArray(this.musicas, "nome").map(item => item.nome);
-    }
-    else {
+    } else {
       this.OrderByArtistaArray(this.musicas, "nome").map(item => item.nome);
     }
 

@@ -26,9 +26,7 @@ export class PesquisaPlaylistComponent implements OnInit {
             resultPlaylist = result.json();
           this.pesquisaUsuarioRealizada.emit(resultPlaylist);
         });
-    }
-    else
+    } else
       this.pesquisaUsuarioRealizada.emit(resultPlaylist);
   }
-
 }
