@@ -18,14 +18,14 @@
     <div class="col-md-2 text-center" style="margin-top: 60px">
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-primary" style="width: 70px" [disabled]="!enableAdd" (click)="criaPlaylist()">
+          <button class="btn btn-primary" id="btnAdd" style="width: 70px" [disabled]="!enableAdd" (click)="criaPlaylist()">
             <i class="fa fa-angle-double-right" style="font-size: 25px"></i>
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12" style="margin-top: 20px; margin-bottom: 60px">
-          <button class="btn btn-primary" style="width: 70px" [disabled]="!enableRemove" (click)="removerMusicas()">
+          <button class="btn btn-primary" id="btnRemove" style="width: 70px" [disabled]="!enableRemove" (click)="removerMusicas()">
             <i class="fa fa-angle-double-left" style="font-size: 25px"></i>
           </button>
         </div>

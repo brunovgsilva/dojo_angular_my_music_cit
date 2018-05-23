@@ -27,11 +27,13 @@ export class HomeComponent implements OnInit {
   }
 
   public pesquisaMusicaRealizada(musicas: Musica[]) {
-    this.OrderByArray(musicas, "nome").map(item => item.nome);
-    this.musicas = musicas;
-    this.musicas.forEach(element => {
-      element.checked = false;
-    });
+    if (musicas != null) {
+      this.OrderByArray(musicas, "nome").map(item => item.nome);
+      this.musicas = musicas;
+      this.musicas.forEach(element => {
+        element.checked = false;
+      });
+    }
   }
 
   public pesquisaUsuarioRealizada(playList: any) {
@@ -126,9 +128,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public criaPlaylist() {
+  public criaPlaylist() {    
     this.musicaService.putPlayList([])
       .toPromise().then((resposta: any) => {
+        console.log(resposta)
         if (resposta.status == "200") {
           this.musicas.forEach((musica) => {
             const resFind = this.musicasPlaylist.filter(f => f.id === musica.id);

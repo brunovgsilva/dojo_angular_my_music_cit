@@ -31,7 +31,7 @@ export class MusicaService {
         return this.http.get(apiUrl).toPromise();
     }
 
-    public putPlayList(musicas: Array<any>) {
+    public putPlayList(musicas: Array<Musica>) {
         const idUsuario = Guid.create();
         const apiUrl = this.urlService + "playlists/" + idUsuario + "/musicas";
         return this.http.put(apiUrl, []);

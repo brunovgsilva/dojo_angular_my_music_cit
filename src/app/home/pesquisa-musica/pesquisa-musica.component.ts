@@ -54,7 +54,7 @@ export class PesquisaMusicaComponent implements OnInit, OnDestroy {
         console.log('Chamada do catch ' + erro); return Observable.of<any>([])
       });
 
-    this.subscription = this.obsFind.subscribe((result: Musica[]) => {
+    this.subscription = this.obsFind.subscribe((result: Musica[]) => {     
       this.pesquisaRealizada.emit(result);
     })
   }
