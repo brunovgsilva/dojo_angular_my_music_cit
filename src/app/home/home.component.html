@@ -1,19 +1,21 @@
-<div class="container home-body">
+
+<div class="container home-body" *ngIf="exibeMusica else exibeDropDown">
   <h2 class="text-center" style="margin-bottom: 30px;">My Music</h2>
   <div class="row">
     <div class="col-md-5">
-      <app-pesquisa-musica (pesquisaRealizada)="pesquisaMusicaRealizada($event)" ></app-pesquisa-musica>
+      <app-pesquisa-musica (pesquisaRealizada)="pesquisaMusicaRealizada($event)"></app-pesquisa-musica>
     </div>
     <div class="col-md-2">
 
     </div>
     <div class="col-md-5">
-      <app-pesquisa-playlist (pesquisaUsuarioRealizada)="pesquisaUsuarioRealizada($event)" ></app-pesquisa-playlist>
+      <app-pesquisa-playlist (pesquisaUsuarioRealizada)="pesquisaUsuarioRealizada($event)"></app-pesquisa-playlist>
     </div>
   </div>
   <div class="row">
     <div class="col-md-5">
-      <app-musicas [listaMusicas]="musicas" (ordenarMusica)="ordenarListaMusica($event)" (selecionarTodas)="selecionarTodasMusicas($event)" (adicionado)="selecionarMusica($event)"></app-musicas>
+      <app-musicas [listaMusicas]="musicas" (ordenarMusica)="ordenarListaMusica($event)" (selecionarTodas)="selecionarTodasMusicas($event)"
+        (adicionado)="selecionarMusica($event)"></app-musicas>
     </div>
     <div class="col-md-2 text-center" style="margin-top: 60px">
       <div class="row">
@@ -37,3 +39,7 @@
   </div>
 
 </div>
+
+<ng-template #exibeDropDown>
+  <app-drop-down></app-drop-down>
+</ng-template>

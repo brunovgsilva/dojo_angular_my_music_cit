@@ -13,6 +13,7 @@ import { MusicaService } from './musicas.service';
 import { PesquisaMusicaComponent } from './home/pesquisa-musica/pesquisa-musica.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { PesquisaPlaylistComponent } from './home/pesquisa-playlist/pesquisa-playlist.component';
+import { DropDownComponent } from './drop-down/drop-down.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PesquisaPlaylistComponent } from './home/pesquisa-playlist/pesquisa-pla
     MusicasComponent,
     PesquisaMusicaComponent,
     PlaylistComponent,
-    PesquisaPlaylistComponent
+    PesquisaPlaylistComponent,
+    DropDownComponent
   ],
   imports: [
     BrowserModule,

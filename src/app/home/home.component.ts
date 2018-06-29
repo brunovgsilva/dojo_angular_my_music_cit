@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public enableAdd: boolean;
   musicas: Musica[] = [];
   musicasPlaylist: Array<Musica> = [];
+  exibeMusica = false;
 
   public orderDesc = true;
 
@@ -128,7 +129,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public criaPlaylist() {    
+  public criaPlaylist() {
     this.musicaService.putPlayList([])
       .toPromise().then((resposta: any) => {
         console.log(resposta)
